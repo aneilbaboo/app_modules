@@ -1,0 +1,5 @@
+.eslintrc
+.nvmrc
+test.*.js
+testModules
+README.md

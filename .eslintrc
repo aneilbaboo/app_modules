@@ -1,0 +1,22 @@
+{
+  "env": {
+    "es6": true,
+    "node": true,
+    "mocha": true
+  },
+
+  "extends": "eslint:recommended",
+  "plugins": [ "mocha" ],
+  "rules": {
+    "strict": 0,
+    "no-unused-vars": [ 2, {
+      "vars": "all",
+      "varsIgnorePattern": "^_$" }
+      ],
+    "indent": [ "error", 2, { "SwitchCase": 1 }],
+    "linebreak-style": [ "error", "unix" ],
+    "quotes": [ "off" ],
+    "semi": [ "error", "always" ],
+    "mocha/no-exclusive-tests": "error"
+  }
+}

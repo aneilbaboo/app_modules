@@ -1,0 +1,30 @@
+{
+  "name": "app_modules",
+  "version": "1.0.0",
+  "description": "Make app subdirectories appear as custom-named modules to require/import",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test.index.js"
+  },
+  "repository": "git+https://github.com/aneilbaboo/app_modules.git",
+  "keywords": [
+    "modules",
+    "import",
+    "require",
+    "symlink"
+  ],
+  "author": "Aneil Mallavarapu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aneilbaboo/app_modules/issues"
+  },
+  "homepage": "https://github.com/aneilbaboo/app_modules#readme",
+  "devDependencies": {
+    "eslint": "^4.2.0",
+    "eslint-plugin-mocha": "^4.11.0"
+  },
+  "dependencies": {
+    "chai": "^4.1.0",
+    "tmp": "^0.0.31"
+  }
+}
