@@ -1,6 +1,6 @@
 {
   "name": "app_modules",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Make app subdirectories appear as custom-named modules to require/import",
   "main": "index.js",
   "scripts": {

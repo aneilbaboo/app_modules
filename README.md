@@ -27,7 +27,7 @@ var app_modules = require('app_modules');
 // IRL, compute the following paths dynamically:
 
 // initialize the library (this creates an app_modules dir in your project root):
-app_modules.initModulesPath('/path/to/my/project/');   
+app_modules.init('/path/to/my/project/');   
 
 // make src/ available as a module named app:
 app_modules.addModule('app', '/path/to/my/project/src/'); // app_modules/app now points to src/
@@ -54,10 +54,10 @@ Initialize app_modules with dynamically computed paths:
 var app_modules = require('app_modules');
 var path = require('path');
 
-app_modules.initModulesPath(path.resolve(__dirname, '..'));  // path of project root
+app_modules.init(path.resolve(__dirname, '..'));  // path of project root
 app_modules.addModule('app', __dirname);  // dynamically link app to either src/ or lib/
 
-// ... continue loading 
+// ... continue loading
 ```
 
 Now you can write:
@@ -73,12 +73,12 @@ This library uses an old but unofficial method `_initPaths` defined on the `Modu
 
 ## API
 
-### initModulesPath
+### init
 
 Ensures a directory exists in the project root and adds it to the NODE_PATH.  Directories in this folder will be accessible as modules.
 
 ```javascript
-initModulesPath(projectRoot, app_modules_dirname)
+init(projectRoot, app_modules_dirname)
 // where
 // projectRoot - path to the root dir of your node project
 // app_modules_dirname - defaults to 'app_modules'

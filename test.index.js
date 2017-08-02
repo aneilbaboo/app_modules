@@ -37,27 +37,27 @@ describe('app_modules', function () {
     rimraf(testDir);
   });
 
-  context('initModulesPath', function () {
+  context('init', function () {
     it('should create an directory with the specify name', function () {
-      app_modules.initModulesPath(testDir, 'testing');
+      app_modules.init(testDir, 'testing');
       expect(fs.statSync(path.resolve(testDir, 'testing')).isDirectory()).to.be.ok;
     });
 
     it('should create an app_modules directory if name is not specified', function () {
-      app_modules.initModulesPath(testDir);
+      app_modules.init(testDir);
       expect(fs.statSync(path.resolve(testDir, 'app_modules')).isDirectory()).to.be.ok;
     });
   });
 
   context('addModule', function () {
     it('should add a symlink to the app_modules directory', function () {
-      app_modules.initModulesPath(testDir);
+      app_modules.init(testDir);
       app_modules.addModule('xyz', path.resolve(__dirname, 'testModules'));
       expect(fs.lstatSync(path.resolve(testDir, 'app_modules/xyz')).isSymbolicLink()).to.be.ok;
     });
 
     it('should add a symlink that is accessible by require', function () {
-      app_modules.initModulesPath(testDir);
+      app_modules.init(testDir);
       app_modules.addModule('xyz', path.resolve(__dirname, 'testModules'));
       expect(require('xyz/foo/bar')).to.equal('baz!');
     });
