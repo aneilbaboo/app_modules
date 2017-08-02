@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/aneilbaboo/app_modules.svg?style=shield&circle-token=5aa6e3e9eae97facd7cd6426c0a582fd3674e3bc)](https://circleci.com/gh/aneilbaboo/app_modules)
+
 # app_modules
 
 Get rid of relative import syntax by making app subdirectories appear as modules.
