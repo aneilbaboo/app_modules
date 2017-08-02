@@ -41,6 +41,10 @@ function addModuleRequirePath(dir) {
 
 module.exports = {
   initModulesPath(projectRoot, modulesDirectory) {
+    console.log('app_modules.initModulesPath is deprecated.  Use app_modules.init'); // eslint-disable-line
+    return this.init(projectRoot, modulesDirectory);
+  },
+  init(projectRoot, modulesDirectory) {
     modulesDirectory = modulesDirectory || 'app_modules';
     moduleRequirePath = path.resolve(projectRoot, modulesDirectory);
     addModuleRequirePath(moduleRequirePath);
