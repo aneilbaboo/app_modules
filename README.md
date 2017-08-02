@@ -1,6 +1,6 @@
 # app_modules
 
-Get rid of relative import syntax by making app subdirectories appear as custom-named modules to require/import.
+Get rid of relative import syntax by making app subdirectories appear as modules.
 
 E.g.,
 ```javascript
@@ -9,52 +9,67 @@ require('app/foo');
 require('../../../foo');
 ```
 
+Works seemlessly with transpiled code (see below).
+
 ## Install
 ```shell
 npm install app_modules
 ```
 
-## How
+## Configure
 
-If requiring a relative file like this makes you sad:
-```javascript
-// in projectroot/src/a/b/c.js we need a reference to
-//    projectroot/src/foor/bar.js
-var foo = require('../../../foo/bar');
-```
+Run code like the following as early as possible in your app:
 
-Do this instead:
 ```javascript
 // before requiring other files...
 var app_modules = require('app_modules');
 
-app_modules.initModulesPath('/path/to/my/project/');  
-app_modules.addModule('app', '/path/to/my/project/src/');
+// IRL, compute the following paths dynamically:
+
+// initialize the library (this creates an app_modules dir in your project root):
+app_modules.initModulesPath('/path/to/my/project/');   
+
+// make src/ available as a module named app:
+app_modules.addModule('app', '/path/to/my/project/src/'); // app_modules/app now points to src/
 ```
 
-Now you can do:
+### Example
+
+Given a Node.js project as follows:
+
+```shell
+- myproject
+  - package.json
+  - src/
+    - main.js # start script
+    - foo/
+      - bar.js
+  - lib/ # transpiled code
+```
+
+Initialize app_modules with dynamically computed paths:
+
 ```javascript
-var bar = require('app/foo/bar'); // profit!
+// src/main.js
+var app_modules = require('app_modules');
+var path = require('path');
+
+app_modules.initModulesPath(path.resolve(__dirname, '..'));  // path of project root
+app_modules.addModule('app', __dirname);  // dynamically link app to either src/ or lib/
+
+// ... continue loading 
 ```
 
-Note that if you transpile your code, say from src/ to lib/, just dynamically generate the right path at load time, replacing
+Now you can write:
 ```javascript
-app_modules.addModule('app', '/path/to/my/project/src/');
+var bar = require('app/foo/bar');
 ```
-with
-```javascript
-app_modules.addModule('app', '/path/to/my/project/lib/');
-```
-Your references to app/foo/bar work in both the source and transpiled code.
 
-## How it works
-
-The `initModulesPath` function creates a directory (named app_modules by default) in your project root, and adds this to your NODE_PATH.  The `addModules` function symlinks subdirectories of your choice into the app_modules directory.  
-
+The `app` module links correctly to `src/` or `lib/` depending on whether you're running the untranspiled `src/main.js` or transpiled `lib/main.js` code.
 
 ### Warning
 
-This library uses an old but unofficial method `_initPaths` defined on the `Modules` class.
+This library uses an old but unofficial method `_initPaths` defined on the `Modules` class.  
 
 ## API
 
